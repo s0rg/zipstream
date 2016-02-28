@@ -5,9 +5,9 @@ import zipfile
 from .zlibstream import ZlibStream
 
 
-class ZipInfoFacade(zipfile.ZipInfo):
+class _ZipInfoFacade(zipfile.ZipInfo):
     '''
-    Makes selected fileds in zipfile.ZipInfo read-only
+    Make some fields read-only for wrapped zipfile.ZipInfo
     '''
     __readonly__ = (
         'CRC',
@@ -59,7 +59,7 @@ class ZipStream(object):
 
         zinfo.compress_size = len(data)
 
-        ro_info = ZipInfoFacade(zinfo)
+        ro_info = _ZipInfoFacade(zinfo)
 
         '''
         Monkey-patch _get_compressor, this is bad, i know.
