@@ -43,7 +43,7 @@ def get_zipfile_result(name, data):
 def run_test(name, fn, data):
     print('=== {}'.format(name))
 
-    info, res = fn(name + '.test', data)
+    info, res = fn('data.test', data)
 
     hdr = info.FileHeader()
 
@@ -73,8 +73,10 @@ def test_me():
     zip_header_bytes = zip_header.FileHeader()
 
     assert(len(zis_header_bytes)==len(zip_header_bytes))
+    assert(zis_header_bytes==zip_header_bytes)
 
     assert(len(zis_result)==len(zip_result))
+    assert(zis_result==zip_result)
 
 test_me()
 
